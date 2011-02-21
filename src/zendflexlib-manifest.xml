@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<componentpackage>
+	<component id="TextInput" class="zendflex.controls.TextInput"/>
+	<component id="CpfInput" class="zendflex.controls.CpfInput"/>
+	<component id="EmailInput" class="zendflex.controls.EmailInput"/>
+	<component id="FormItem" class="zendflex.controls.FormItem"/>
+</componentpackage>

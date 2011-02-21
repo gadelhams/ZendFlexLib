@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<design>
+	<namespaces>
+		<namespace prefix="zfl" uri="http://www.zendflex.com.br/mxml/2011"/>
+	</namespaces>
+
+	<categories>
+		<category id="zflcontrols" label="ZflControls" defaultExpand="true"/>
+	</categories>
+
+	<components>
+
+		<component name="TextInput" namespace="zfl" category="zflcontrols" displayName="TextInput">
+		</component>
+
+		<component name="CpfInput" namespace="zfl" category="zflcontrols" displayName="CpfInput">
+			<mxmlProperties>
+				<textfield id="inputMask" name="Input Mask:"/>
+			</mxmlProperties>
+		</component>
+
+		<component name="EmailInput" namespace="zfl" category="zflcontrols" displayName="EmailInput">
+		</component>
+
+		<component name="FormItem" namespace="zfl" category="zflcontrols" displayName="FormItem">
+		</component>
+
+	</components>
+
+
+</design>
