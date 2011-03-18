@@ -6,9 +6,13 @@
 
 	<categories>
 		<category id="zflcontrols" label="ZflControls" defaultExpand="true"/>
+		<category id="zfllayout" label="ZflLayout" defaultExpand="true"/>
 	</categories>
 
 	<components>
+
+		<component name="MaskTextInput" namespace="zfl" category="zflcontrols" displayName="MaskTextInput">
+		</component>
 
 		<component name="TextInput" namespace="zfl" category="zflcontrols" displayName="TextInput">
 		</component>
@@ -23,6 +27,12 @@
 		</component>
 
 		<component name="FormItem" namespace="zfl" category="zflcontrols" displayName="FormItem">
+		</component>
+
+		<component name="CheckBox" namespace="zfl" category="zflcontrols" displayName="CheckBox">
+		</component>
+
+		<component name="Panel" namespace="zfl" category="zfllayout" displayName="Panel">
 		</component>
 
 	</components>

@@ -1,4 +1,4 @@
-package zendflex.controls
+package zendflex.components
 {
 	
 	import mx.containers.FormItem;

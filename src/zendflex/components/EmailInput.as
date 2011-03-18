@@ -1,4 +1,4 @@
-package zendflex.controls
+package zendflex.components
 {
 	public class EmailInput extends TextInput
 	{

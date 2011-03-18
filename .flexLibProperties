@@ -1,13 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <flexLibProperties includeAllClasses="true" version="3">
   <includeClasses>
-    <classEntry path="zendflex.controls.TextInput"/>
-    <classEntry path="zendflex.controls.CpfInput"/>
-    <classEntry path="zendflex.consts.TextRestrict"/>
-    <classEntry path="zendflex.consts.TextLang"/>
+    <classEntry path="zendflex.assets.AssetsClass"/>
+    <classEntry path="zendflex.components.CheckBox"/>
+    <classEntry path="zendflex.components.CpfInput"/>
+    <classEntry path="zendflex.components.EmailInput"/>
+    <classEntry path="zendflex.components.FormItem"/>
+    <classEntry path="zendflex.components.MaskTextInput"/>
+    <classEntry path="zendflex.components.Panel"/>
+    <classEntry path="zendflex.components.RichEditableText"/>
+    <classEntry path="zendflex.components.TextInput"/>
     <classEntry path="zendflex.consts.TextCaps"/>
+    <classEntry path="zendflex.consts.TextLang"/>
+    <classEntry path="zendflex.consts.TextRestrict"/>
     <classEntry path="zendflex.consts.TextValidator"/>
-    <classEntry path="zendflex.controls.EmailInput"/>
+    <classEntry path="zendflex.controls.Notifier"/>
+    <classEntry path="zendflex.events.MasterEvent"/>
+    <classEntry path="zendflex.events.TextEvent"/>
+    <classEntry path="zendflex.events.ZendFlexLibEvent"/>
+    <classEntry path="zendflex.renderers.TreeCheckBoxRenderer"/>
+    <classEntry path="zendflex.skins.CheckBoxIndeterminate"/>
+    <classEntry path="zendflex.validators.ValidatorError"/>
   </includeClasses>
   <includeResources>
     <resourceEntry destPath="zendflex/assets/img/icon/user--arrow.png" sourcePath="zendflex/assets/img/icon/user--arrow.png"/>
@@ -25,16 +38,16 @@
     <resourceEntry destPath="zendflex/assets/img/uiicon/ui-button.png" sourcePath="zendflex/assets/img/uiicon/ui-button.png"/>
     <resourceEntry destPath="zendflex/assets/img/uiicon/ui-tab--pencil.png" sourcePath="zendflex/assets/img/uiicon/ui-tab--pencil.png"/>
     <resourceEntry destPath="zendflex/assets/img/icon/asterisk.png" sourcePath="zendflex/assets/img/icon/asterisk.png"/>
-    <resourceEntry destPath="zendflex/assets/img/uiicon/ui-text-field-password.png" sourcePath="zendflex/assets/img/uiicon/ui-text-field-password.png"/>
-    <resourceEntry destPath="zendflex/assets/img/uiicon/ui-tab--minus.png" sourcePath="zendflex/assets/img/uiicon/ui-tab--minus.png"/>
     <resourceEntry destPath="zendflex/assets/img/uiicon/ui-radio-button.png" sourcePath="zendflex/assets/img/uiicon/ui-radio-button.png"/>
+    <resourceEntry destPath="zendflex/assets/img/uiicon/ui-tab--minus.png" sourcePath="zendflex/assets/img/uiicon/ui-tab--minus.png"/>
+    <resourceEntry destPath="zendflex/assets/img/uiicon/ui-text-field-password.png" sourcePath="zendflex/assets/img/uiicon/ui-text-field-password.png"/>
     <resourceEntry destPath="zendflex/assets/img/icon/crown.png" sourcePath="zendflex/assets/img/icon/crown.png"/>
     <resourceEntry destPath="zendflex/assets/img/icon/calendar-day.png" sourcePath="zendflex/assets/img/icon/calendar-day.png"/>
     <resourceEntry destPath="zendflex/assets/img/uiicon/ui-text-field-suggestion.png" sourcePath="zendflex/assets/img/uiicon/ui-text-field-suggestion.png"/>
     <resourceEntry destPath="zendflex/assets/img/icon/ui-text-field.png" sourcePath="zendflex/assets/img/icon/ui-text-field.png"/>
     <resourceEntry destPath="zendflex/assets/img/uiicon/ui-tab.png" sourcePath="zendflex/assets/img/uiicon/ui-tab.png"/>
-    <resourceEntry destPath="zendflex/assets/img/uiicon/ui-button-toggle.png" sourcePath="zendflex/assets/img/uiicon/ui-button-toggle.png"/>
     <resourceEntry destPath="zendflex/assets/img/icon/point-silver.png" sourcePath="zendflex/assets/img/icon/point-silver.png"/>
+    <resourceEntry destPath="zendflex/assets/img/uiicon/ui-button-toggle.png" sourcePath="zendflex/assets/img/uiicon/ui-button-toggle.png"/>
     <resourceEntry destPath="zendflex/assets/img/icon/navigation-000-button.png" sourcePath="zendflex/assets/img/icon/navigation-000-button.png"/>
     <resourceEntry destPath="zendflex/assets/img/icon/lightning.png" sourcePath="zendflex/assets/img/icon/lightning.png"/>
     <resourceEntry destPath="zendflex/assets/img/icon/trophy-silver.png" sourcePath="zendflex/assets/img/icon/trophy-silver.png"/>
@@ -64,22 +77,22 @@
     <resourceEntry destPath="zendflex/assets/img/uiicon/ui-menu.png" sourcePath="zendflex/assets/img/uiicon/ui-menu.png"/>
     <resourceEntry destPath="zendflex/assets/img/uiicon/ui-status-bar.png" sourcePath="zendflex/assets/img/uiicon/ui-status-bar.png"/>
     <resourceEntry destPath="zendflex/assets/img/icon/status-away.png" sourcePath="zendflex/assets/img/icon/status-away.png"/>
-    <resourceEntry destPath="zendflex/assets/img/uiicon/ui-labels.png" sourcePath="zendflex/assets/img/uiicon/ui-labels.png"/>
-    <resourceEntry destPath="zendflex/assets/img/icon/medal-red.png" sourcePath="zendflex/assets/img/icon/medal-red.png"/>
     <resourceEntry destPath="zendflex/assets/img/uiicon/ui-address-bar-green.png" sourcePath="zendflex/assets/img/uiicon/ui-address-bar-green.png"/>
+    <resourceEntry destPath="zendflex/assets/img/icon/medal-red.png" sourcePath="zendflex/assets/img/icon/medal-red.png"/>
+    <resourceEntry destPath="zendflex/assets/img/uiicon/ui-labels.png" sourcePath="zendflex/assets/img/uiicon/ui-labels.png"/>
     <resourceEntry destPath="zendflex/assets/img/uiicon/ui-color-picker.png" sourcePath="zendflex/assets/img/uiicon/ui-color-picker.png"/>
     <resourceEntry destPath="zendflex/assets/img/icon/medal-silver-red.png" sourcePath="zendflex/assets/img/icon/medal-silver-red.png"/>
-    <resourceEntry destPath="zendflex/assets/img/uiicon/ui-list-box.png" sourcePath="zendflex/assets/img/uiicon/ui-list-box.png"/>
     <resourceEntry destPath="zendflex/assets/img/uiicon/ui-combo-box-blue.png" sourcePath="zendflex/assets/img/uiicon/ui-combo-box-blue.png"/>
-    <resourceEntry destPath="zendflex/assets/img/icon/status-offline.png" sourcePath="zendflex/assets/img/icon/status-offline.png"/>
+    <resourceEntry destPath="zendflex/assets/img/uiicon/ui-list-box.png" sourcePath="zendflex/assets/img/uiicon/ui-list-box.png"/>
     <resourceEntry destPath="zendflex/assets/img/uiicon/ui-tooltip-balloon.png" sourcePath="zendflex/assets/img/uiicon/ui-tooltip-balloon.png"/>
+    <resourceEntry destPath="zendflex/assets/img/icon/status-offline.png" sourcePath="zendflex/assets/img/icon/status-offline.png"/>
     <resourceEntry destPath="zendflex/assets/img/uiicon/ui-text-area.png" sourcePath="zendflex/assets/img/uiicon/ui-text-area.png"/>
-    <resourceEntry destPath="zendflex/assets/img/uiicon/ui-radio-buttons.png" sourcePath="zendflex/assets/img/uiicon/ui-radio-buttons.png"/>
     <resourceEntry destPath="zendflex/assets/img/icon/user--plus.png" sourcePath="zendflex/assets/img/icon/user--plus.png"/>
+    <resourceEntry destPath="zendflex/assets/img/uiicon/ui-radio-buttons.png" sourcePath="zendflex/assets/img/uiicon/ui-radio-buttons.png"/>
     <resourceEntry destPath="zendflex/assets/img/uiicon/ui-toolbar--pencil.png" sourcePath="zendflex/assets/img/uiicon/ui-toolbar--pencil.png"/>
     <resourceEntry destPath="zendflex/assets/img/uiicon/ui-combo-box-calendar.png" sourcePath="zendflex/assets/img/uiicon/ui-combo-box-calendar.png"/>
-    <resourceEntry destPath="zendflex/assets/img/uiicon/ui-buttons.png" sourcePath="zendflex/assets/img/uiicon/ui-buttons.png"/>
     <resourceEntry destPath="zendflex/assets/img/icon/mail--exclamation.png" sourcePath="zendflex/assets/img/icon/mail--exclamation.png"/>
+    <resourceEntry destPath="zendflex/assets/img/uiicon/ui-buttons.png" sourcePath="zendflex/assets/img/uiicon/ui-buttons.png"/>
     <resourceEntry destPath="zendflex/assets/img/uiicon/ui-group-box.png" sourcePath="zendflex/assets/img/uiicon/ui-group-box.png"/>
     <resourceEntry destPath="zendflex/assets/img/icon/mastertextinput.png" sourcePath="zendflex/assets/img/icon/mastertextinput.png"/>
     <resourceEntry destPath="zendflex/assets/img/uiicon/ui-separator.png" sourcePath="zendflex/assets/img/uiicon/ui-separator.png"/>
@@ -88,8 +101,8 @@
     <resourceEntry destPath="zendflex/assets/img/uiicon/ui-splitter-horizontal.png" sourcePath="zendflex/assets/img/uiicon/ui-splitter-horizontal.png"/>
     <resourceEntry destPath="zendflex/assets/img/icon/balloons.png" sourcePath="zendflex/assets/img/icon/balloons.png"/>
     <resourceEntry destPath="zendflex/assets/img/icon/users.png" sourcePath="zendflex/assets/img/icon/users.png"/>
-    <resourceEntry destPath="zendflex/assets/img/icon/navigation-090-button.png" sourcePath="zendflex/assets/img/icon/navigation-090-button.png"/>
     <resourceEntry destPath="zendflex/assets/img/uiicon/ui-tooltip-balloon-bottom.png" sourcePath="zendflex/assets/img/uiicon/ui-tooltip-balloon-bottom.png"/>
+    <resourceEntry destPath="zendflex/assets/img/icon/navigation-090-button.png" sourcePath="zendflex/assets/img/icon/navigation-090-button.png"/>
     <resourceEntry destPath="zendflex/assets/img/icon/lock.png" sourcePath="zendflex/assets/img/icon/lock.png"/>
     <resourceEntry destPath="zendflex/assets/img/icon/exclamation-button.png" sourcePath="zendflex/assets/img/icon/exclamation-button.png"/>
     <resourceEntry destPath="zendflex/assets/img/icon/navigation-270-button.png" sourcePath="zendflex/assets/img/icon/navigation-270-button.png"/>
@@ -103,8 +116,8 @@
     <resourceEntry destPath="zendflex/assets/img/uiicon/ui-slider.png" sourcePath="zendflex/assets/img/uiicon/ui-slider.png"/>
     <resourceEntry destPath="zendflex/assets/img/icon/truck.png" sourcePath="zendflex/assets/img/icon/truck.png"/>
     <resourceEntry destPath="zendflex/assets/img/icon/trophy-bronze.png" sourcePath="zendflex/assets/img/icon/trophy-bronze.png"/>
-    <resourceEntry destPath="zendflex/assets/img/uiicon/ui-separator-label.png" sourcePath="zendflex/assets/img/uiicon/ui-separator-label.png"/>
     <resourceEntry destPath="zendflex/assets/img/icon/home.png" sourcePath="zendflex/assets/img/icon/home.png"/>
+    <resourceEntry destPath="zendflex/assets/img/uiicon/ui-separator-label.png" sourcePath="zendflex/assets/img/uiicon/ui-separator-label.png"/>
     <resourceEntry destPath="zendflex/assets/img/icon/eraser.png" sourcePath="zendflex/assets/img/icon/eraser.png"/>
     <resourceEntry destPath="zendflex/assets/img/uiicon/ui-tab--plus.png" sourcePath="zendflex/assets/img/uiicon/ui-tab--plus.png"/>
     <resourceEntry destPath="zendflex/assets/img/icon/question-button.png" sourcePath="zendflex/assets/img/icon/question-button.png"/>
