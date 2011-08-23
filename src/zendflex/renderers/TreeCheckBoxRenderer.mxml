@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:MXTreeItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+	xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:components="zendflex.components.*">
+
+	<fx:Script>
+		<![CDATA[
+			import zendflex.components.CheckBox;
+			import zendflex.skins.CheckBoxIndeterminate;
+			
+			import mx.controls.Tree;
+			import mx.controls.listClasses.BaseListData;
+			import mx.controls.listClasses.ListData;
+			import mx.controls.treeClasses.TreeListData;
+			
+			/**
+			 * <p>CheckBox handler that select or deselect the component
+			 * and make a verification on the parent itens to use the correct
+			 * state.</p>
+			 *
+			 * @param event
+			 */
+			private function checkBoxClickHandler(event:MouseEvent):void
+			{
+				
+				super.data.selected = event.target.selected;
+				super.data.indeterminate = event.target.indeterminate;
+				
+				var itemParent:* = Tree(owner).getParentItem(treeListData.item);
+				
+				if (itemParent != null) {
+					recursiveIndetermate(itemParent);
+				}
+				
+				treeListData.item.selected = event.target.selected;
+				treeListData.item.indeterminate = event.target.indeterminate;
+				
+				if (treeListData.hasChildren) {
+					recursiveCheck(treeListData.item.children, treeListData.item.selected, treeListData.item.indeterminate);
+				}
+				
+				forceRedraw(Tree(owner), Tree(owner).dataProvider);
+			}
+			
+			private function recursiveCheck(childrens:Array, selected:Boolean, indeterminate:Boolean):void
+			{
+				var count:int = 0;
+				
+				for each (var obj:Object in childrens) {
+					treeListData.item.children[count].selected = selected;
+					
+					obj.selected = selected;
+					obj.indeterminate = indeterminate;
+					
+					if (obj.children != null) {
+						if (obj.children.length > 0) {
+							obj.indeterminate = selected;
+						}
+					}
+					
+					recursiveCheck(obj.children, selected, indeterminate);
+					
+					count++;
+				}
+				
+				forceRedraw(Tree(owner), Tree(owner).dataProvider);
+			}
+			
+			private function recursiveIndetermate(item:Object):void
+			{
+				item.indeterminate = true;
+				item.selected = false;
+				
+				var itemParent:* = Tree(owner).getParentItem(item);
+				
+				if (itemParent != null) {
+					recursiveIndetermate(itemParent);
+				}
+			}
+			
+			
+			private function forceRedraw(tree:Tree, dataProvider:Object):void
+			{
+				var scrollPosition:Number = tree.verticalScrollPosition;
+				var openItems:Object = tree.openItems;
+				var selectedIndex:int = tree.selectedIndex;
+				tree.dataProvider = dataProvider;
+				tree.openItems = openItems;
+				tree.validateNow();
+				tree.verticalScrollPosition = scrollPosition;
+				tree.selectedIndex = selectedIndex;
+			}
+			
+			override public function set data(value:Object):void
+			{
+				if (value == null) {
+					return;
+				}
+				
+				if (value.children != null) {
+					var count:int;
+					
+					for each (var obj:Object in value.children) {
+						if (obj.selected == true) {
+							count++;
+						}
+					}
+					
+					if (value.children.length == count) {
+						checkBox.selected = true;
+						checkBox.indeterminate = false;
+						value.selected = true;
+						value.indeterminate = false;
+					} else if (value.children.length > count && count != 0) {
+						checkBox.selected = false;
+						checkBox.indeterminate = true;
+						value.indeterminate = true;
+						value.selected = false;
+					} else if (count == 0) {
+						checkBox.selected = false;
+						checkBox.indeterminate = false;
+						value.selected = false;
+						value.indeterminate = false;
+					}
+					
+				} else {
+					checkBox.selected = value.selected;
+					value.indeterminate = false;
+				}
+				
+				super.data = value;
+			}
+			
+			/**
+			 * This method it's just to make sure that the selected check boxes
+			 * keep the <code>checkBox.selected</code> property.
+			 *
+			 */
+			override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void
+			{
+				super.updateDisplayList(unscaledWidth, unscaledHeight);
+				
+				if (treeListData == null) {
+					return;
+				}
+				
+				if (treeListData.item.children != null) {
+					var selectedCount:int;
+					var indeterminateCount:int;
+					
+					for each (var obj:Object in treeListData.item.children) {
+						if (obj.selected == true) {
+							selectedCount++;
+						}
+						
+						if (obj.indeterminate == true) {
+							indeterminateCount++;
+						}
+					}
+					
+					
+					if (treeListData.item.children.length == selectedCount) {
+						checkBox.selected = true;
+						treeListData.item.selected = true;
+						treeListData.item.indeterminate = false;
+					} else if ((treeListData.item.children.length > selectedCount && selectedCount > 0) || indeterminateCount > 0) {
+						checkBox.selected = false;
+						checkBox.indeterminate = true;
+						treeListData.item.indeterminate = true;
+						treeListData.item.selected = false;
+					} else if (selectedCount == 0) {
+						checkBox.selected = false;
+						checkBox.indeterminate = false;
+						treeListData.item.selected = false;
+						treeListData.item.indeterminate = false;
+					}
+					
+				} else {
+					checkBox.selected = treeListData.item.selected;
+					treeListData.item.indeterminate = treeListData.item.indeterminate;
+				}
+				
+				super.label = treeListData.label;
+				super.data = treeListData.item;
+			}
+		]]>
+	</fx:Script>
+
+	<s:states>
+		<s:State name="normal"/>
+		<s:State name="hovered"/>
+		<s:State name="selected"/>
+	</s:states>
+
+	<s:HGroup id="hGroup" left="0" right="0" top="0" bottom="0" verticalAlign="middle">
+
+		<s:Rect id="indentationSpacer" width="{treeListData.indent}" percentHeight="100" alpha="0">
+			<s:fill>
+				<s:SolidColor color="0xFFFFFF"/>
+			</s:fill>
+		</s:Rect>
+
+		<s:Group id="disclosureGroup">
+			<s:BitmapImage source="{treeListData.disclosureIcon}" visible="{treeListData.hasChildren}"/>
+		</s:Group>
+
+		<components:CheckBox id="checkBox" click="checkBoxClickHandler(event)" selected="{treeListData.item.selected}"
+			indeterminate="{treeListData.item.indeterminate}"/>
+		<s:BitmapImage source="{treeListData.icon}"/>
+		<s:Label id="labelField" text="{treeListData.label}" paddingTop="2"/>
+		<!--<s:Label id="labelField" text="{treeListData.item.selected.toString() + ' | ' + treeListData.item.indeterminate.toString()+ ' - ' + treeListData.label}" paddingTop="2"/>-->
+
+	</s:HGroup>
+
+</s:MXTreeItemRenderer>
