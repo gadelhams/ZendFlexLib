@@ -1,50 +1,44 @@
 package zendflex.components
 {
+	import flash.events.FocusEvent;
 	import flash.events.KeyboardEvent;
 	
 	import flashx.textLayout.operations.DeleteTextOperation;
+	import flashx.textLayout.operations.InsertTextOperation;
 	
 	import spark.components.TextInput;
 	import spark.events.TextOperationEvent;
 	
-	import zendflex.events.TextEvent;
+	import zendflex.events.ZflTextEvent;
 	import zendflex.ui.Keyboard;
 	
 	public class MaskTextInput extends TextInput
 	{
 		
-		//--------------------------------------------------------------------------
+		//------------------------------------------------------------
 		//
-		//  Const
+		//	Properties
 		//
-		//--------------------------------------------------------------------------
+		//------------------------------------------------------------
 		
-		
-		
-		//--------------------------------------------------------------------------
-		//
-		//  Propriedades
-		//
-		//--------------------------------------------------------------------------
-		
-		//----------------------------------
+		//------------------------------
 		//	_textEvent
-		//----------------------------------
+		//------------------------------
 		
-		private var _textEvent:TextEvent;
+		private var _zfTextEvent:ZflTextEvent;
 		
-		//--------------------------------
+		//------------------------------
 		//	_currentInputMask
-		//--------------------------------
+		//------------------------------
 		
 		/**
 		 * The inputMask with the _blankChar.
 		 */
 		private var _currentInputMask:String;
 		
-		//--------------------------------
+		//------------------------------
 		//	_blankCharsPositions
-		//--------------------------------
+		//------------------------------
 		
 		/**
 		 * An array that contains all the positions of the
@@ -52,9 +46,9 @@ package zendflex.components
 		 */
 		private var _blankCharsPositions:Array;
 		
-		//--------------------------------
+		//------------------------------
 		//	_maskCharsPositions
-		//--------------------------------
+		//------------------------------
 		
 		/**
 		 * An array that contains all the positions of the
@@ -62,9 +56,9 @@ package zendflex.components
 		 */
 		private var _maskCharsPositions:Array;
 		
-		//--------------------------------
+		//------------------------------
 		//	_useMask
-		//--------------------------------
+		//------------------------------
 		
 		private var _useMask:Boolean = false;
 		
@@ -78,15 +72,15 @@ package zendflex.components
 			return _useMask;
 		}
 		
-		protected function set useMask(value:Boolean):void
+		public function set useMask(value:Boolean):void
 		{
 			_useMask = value;
 		}
 		
 		
-		//--------------------------------
+		//------------------------------
 		//	_inputMask
-		//--------------------------------
+		//------------------------------
 		
 		private var _inputMask:String;
 		
@@ -128,9 +122,9 @@ package zendflex.components
 			changeInputMask(_inputMask);
 		}
 		
-		//--------------------------------
+		//------------------------------
 		//	_blankChar
-		//--------------------------------
+		//------------------------------
 		
 		private var _blankChar:String = " ";
 		
@@ -149,9 +143,9 @@ package zendflex.components
 			_blankChar = value;
 		}
 		
-		//--------------------------------
+		//------------------------------
 		//	_unmaskedText
-		//--------------------------------
+		//------------------------------
 		
 		private var _unmaskedText:String;
 		
@@ -170,9 +164,9 @@ package zendflex.components
 			_unmaskedText = value;
 		}
 		
-		//--------------------------------
+		//------------------------------
 		//	_cursorPosition
-		//--------------------------------
+		//------------------------------
 		
 		/**
 		 * The position of the cursor, will be reset every time in the
@@ -180,31 +174,33 @@ package zendflex.components
 		 */
 		private var _cursorPosition:int;
 		
-		//--------------------------------
+		//------------------------------
 		//	_insertChar
-		//--------------------------------
+		//------------------------------
 		
 		/**
 		 * The character that will be insert in the TextInput.text property.
 		 */
 		private var _insertChar:String;
 		
-		//--------------------------------------------------------------------------
+		//------------------------------------------------------------
 		//
-		//  Methods
+		//	Methods
 		//
-		//--------------------------------------------------------------------------
+		//------------------------------------------------------------
 		
 		/**
-		 * <p>Whenever the _inputMask change the value, will call this method.
+		 * [Method]
+		 *
+		 * <p>Whenever the _inputMask change the value, this method will be called.
 		 * Changing the maskChar with the _blankChar.</p>
 		 *
 		 * <p>Use the length of the mask to set the maxChar.</p>
 		 */
 		protected function changeInputMask(mask:String):void
 		{
-			_textEvent = new TextEvent(TextEvent.INPUT_MASK_CHANGING);
-			dispatchEvent(_textEvent);
+			_zfTextEvent = new ZflTextEvent(ZflTextEvent.INPUT_MASK_CHANGING);
+			dispatchEvent(_zfTextEvent);
 			
 			if (mask.length == 0 || mask == "" || mask == null) {
 				return;
@@ -231,11 +227,13 @@ package zendflex.components
 			text = _currentInputMask;
 			maxChars = mask.length;
 			
-			_textEvent = new TextEvent(TextEvent.INPUT_MASK_CHANGE);
-			dispatchEvent(_textEvent);
+			_zfTextEvent = new ZflTextEvent(ZflTextEvent.INPUT_MASK_CHANGE);
+			dispatchEvent(_zfTextEvent);
 		}
 		
 		/**
+		 * [Method]
+		 *
 		 * <p>Use regular expression to validate a character.
 		 * Just pass the maskChar that indicate the pattern that will be used
 		 * to validate the inputChar.</p>
@@ -269,6 +267,8 @@ package zendflex.components
 		}
 		
 		/**
+		 * [Method]
+		 *
 		 * <p>Function that checks if the character is a mask or not.</p>
 		 *
 		 * <p>Accept only the ?, & or # characters.</p>
@@ -291,6 +291,8 @@ package zendflex.components
 		}
 		
 		/**
+		 * [Method]
+		 *
 		 * <p>Return the unmaskedText property with no mask characters</p>
 		 *
 		 * @return String
@@ -307,6 +309,8 @@ package zendflex.components
 		}
 		
 		/**
+		 * [Method]
+		 *
 		 * <p>Recursive method that checks if the current char it's a mask char.
 		 * If true, make the manual selection from the current char to the next.
 		 * If false, call the recursiveInsertChar again till finds a valid mask char.</p>
@@ -339,6 +343,8 @@ package zendflex.components
 		}
 		
 		/**
+		 * [Method]
+		 *
 		 * <p>Recursive method that checks if the current char it's a mask char.
 		 * If true, make the manual selection from the current char to the next.
 		 * If false, call the recusiveMaskChar again till finds a valid mask char.</p>
@@ -347,11 +353,11 @@ package zendflex.components
 		 */
 		private function recursiveDeleteChar():void
 		{
-			
 			var character:* = _inputMask.charAt(_cursorPosition);
 			
 			if (isMask(_inputMask.charAt(_cursorPosition))) {
-				selectRange(_cursorPosition, _cursorPosition - 1);
+				text = splice(text, _cursorPosition, _cursorPosition + 1, _blankChar);
+				selectRange(_cursorPosition, _cursorPosition);
 				return;
 			}
 			
@@ -359,24 +365,43 @@ package zendflex.components
 			recursiveDeleteChar();
 		}
 		
-		//--------------------------------------------------------------------------
-		//
-		//  Handlers
-		//
-		//--------------------------------------------------------------------------
-		
-		protected function changeHandler(event:TextOperationEvent):void
+		/**
+		 * [Method]
+		 *
+		 * @param str String
+		 * @param start int
+		 * @param end int
+		 * @param strToInsert String
+		 */
+		private static function splice(str:String, start:int, end:int, strToInsert:String):String
 		{
-		
+			return str.substring(0, start) + strToInsert + str.substring(end, str.length);
 		}
+		
+		//------------------------------------------------------------
+		//
+		//	Handler
+		//
+		//------------------------------------------------------------
 		
 		protected function changingHandler(event:TextOperationEvent):void
 		{
 			if (event.operation is DeleteTextOperation) {
 				
-				_cursorPosition = selectionAnchorPosition - 1;
+				if (useMask) {
+					event.preventDefault();
+					
+					_cursorPosition = selectionAnchorPosition - 1;
+					
+					recursiveDeleteChar();
+				}
+			}
+			
+			if (event.operation is InsertTextOperation) {
 				
-					//recursiveDeleteChar();
+				/*if (InsertTextOperation(event.operation).deleteSelectionState != null && useMask) {
+					event.preventDefault();
+				}*/
 			}
 		}
 		
@@ -394,13 +419,15 @@ package zendflex.components
 				case Keyboard.RIGHT:
 					break;
 				case Keyboard.BACKSPACE:
-					
-					//selectRange(0, 1);
-					
 					break;
 				default:
 					
-					_cursorPosition = selectionAnchorPosition;
+					if (selectionAnchorPosition < selectionActivePosition) {
+						_cursorPosition = selectionAnchorPosition;
+					} else {
+						_cursorPosition = selectionActivePosition;
+					}
+					
 					_insertChar = String.fromCharCode(event.keyCode);
 					
 					recursiveInsertChar();
@@ -409,24 +436,27 @@ package zendflex.components
 		
 		}
 		
-		//--------------------------------------------------------------------------
-		//
-		//  Construtor
-		//
-		//--------------------------------------------------------------------------
+		override protected function focusInHandler(event:FocusEvent):void
+		{
+			super.focusInHandler(event);
+			
+			if (text == _currentInputMask) {
+				selectRange(0, 0);
+			}
+		}
 		
+		//------------------------------------------------------------
+		//
+		//	Construtor
+		//
+		//------------------------------------------------------------
 		
 		public function MaskTextInput()
 		{
-			textDisplay = new RichEditableText();
-			addEventListener(TextOperationEvent.CHANGE, changeHandler);
-			addEventListener(TextOperationEvent.CHANGING, changingHandler);
-			//removeEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
-			
-			//textDisplay.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
-			
-			
 			super();
+			
+			addEventListener(TextOperationEvent.CHANGING, changingHandler);
 		}
+	
 	}
 }

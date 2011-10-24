@@ -7,4 +7,5 @@
 	<component id="FormItem" class="zendflex.components.FormItem"/>
 	<component id="CheckBox" class="zendflex.components.CheckBox"/>
 	<component id="Panel" class="zendflex.components.Panel"/>
+	<component id="DateField" class="zendflex.components.DateField"/>
 </componentpackage>
