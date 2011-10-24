@@ -14,7 +14,7 @@ package zendflex.events
 	 * @playerversion AIR 1.5
 	 * @productversion Flex 4
 	 */
-	public class TextEvent extends MasterEvent
+	public class ZflTextEvent extends MasterEvent
 	{
 		//--------------------------------------------------------------------------
 		//
@@ -61,7 +61,7 @@ package zendflex.events
 		//
 		//--------------------------------------------------------------------------
 		
-		public function TextEvent(type:String, bubbles:Boolean = false, cancelable:Boolean = false)
+		public function ZflTextEvent(type:String, bubbles:Boolean = false, cancelable:Boolean = false)
 		{
 			super(type, bubbles, cancelable);
 		}
