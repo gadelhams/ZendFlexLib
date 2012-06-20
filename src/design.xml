@@ -20,10 +20,16 @@
 		<component name="TextInput" namespace="zfl" category="zflcomponents" displayName="TextInput">
 		</component>
 
+		<component name="DropDownList" namespace="zfl" category="zflcomponents" displayName="DropDownList">
+		</component>
+
 		<component name="CpfInput" namespace="zfl" category="zflcomponents" displayName="CpfInput">
 		</component>
 
 		<component name="EmailInput" namespace="zfl" category="zflcomponents" displayName="EmailInput">
+		</component>
+
+		<component name="Form" namespace="zfl" category="zflcomponents" displayName="Form">
 		</component>
 
 		<component name="FormItem" namespace="zfl" category="zflcomponents" displayName="FormItem">

@@ -4,8 +4,10 @@
 	<component id="TextInput" class="zendflex.components.TextInput"/>
 	<component id="CpfInput" class="zendflex.components.CpfInput"/>
 	<component id="EmailInput" class="zendflex.components.EmailInput"/>
+	<component id="Form" class="zendflex.components.Form"/>
 	<component id="FormItem" class="zendflex.components.FormItem"/>
 	<component id="CheckBox" class="zendflex.components.CheckBox"/>
 	<component id="Panel" class="zendflex.components.Panel"/>
 	<component id="DateField" class="zendflex.components.DateField"/>
+	<component id="DropDownList" class="zendflex.components.DropDownList"/>
 </componentpackage>

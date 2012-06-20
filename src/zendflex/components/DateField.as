@@ -8,6 +8,7 @@ package zendflex.components
 		{
 			super();
 			
+			width = 120;
 			editable = true;
 			formatString = "DD/MM/YYYY";
 			yearNavigationEnabled = true;

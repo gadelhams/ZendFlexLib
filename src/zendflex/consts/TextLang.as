@@ -2,9 +2,9 @@ package zendflex.consts
 {
 	
 	/**
-	 * Class that has the lang of the <code>zendflex.controls.TextInput</code>.
+	 * Class that has the lang of the <code>zendflex.components.TextInput</code>.
 	 *
-	 * @see zendflex.controls.TextInput
+	 * @see zendflex.components.TextInput
 	 *
 	 * @author feliperodrigues
 	 *

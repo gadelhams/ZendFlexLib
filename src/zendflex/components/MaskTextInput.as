@@ -1,11 +1,10 @@
 package zendflex.components
 {
-	import flash.events.FocusEvent;
-	import flash.events.KeyboardEvent;
+	import flash.events.*;
 	
-	import flashx.textLayout.operations.DeleteTextOperation;
-	import flashx.textLayout.operations.InsertTextOperation;
+	import flashx.textLayout.operations.*;
 	
+	import spark.components.RichEditableText;
 	import spark.components.TextInput;
 	import spark.events.TextOperationEvent;
 	
@@ -365,6 +364,26 @@ package zendflex.components
 			recursiveDeleteChar();
 		}
 		
+		private function checkPosition():void
+		{
+			var char:String;
+			var maskChar:String;
+			
+			for (var i:int = 0; i < maxChars; i++) {
+				
+				char = text.charAt(i);
+				maskChar = _currentInputMask.charAt(i);
+				
+				var bool:Boolean = isMask(_inputMask.charAt(i));
+				
+				if (char == maskChar && bool) {
+					selectRange(i, i);
+					return;
+				}
+				
+			}
+		}
+		
 		/**
 		 * [Method]
 		 *
@@ -391,23 +410,51 @@ package zendflex.components
 				if (useMask) {
 					event.preventDefault();
 					
-					_cursorPosition = selectionAnchorPosition - 1;
+					if (selectionAnchorPosition >= 0) {
+						_cursorPosition = selectionAnchorPosition - 1;
+					} else {
+						_cursorPosition = 0;
+					}
 					
 					recursiveDeleteChar();
 				}
 			}
 			
 			if (event.operation is InsertTextOperation) {
-				
 				/*if (InsertTextOperation(event.operation).deleteSelectionState != null && useMask) {
 					event.preventDefault();
 				}*/
+			}
+			
+			if (event.operation is PasteOperation) {
+				var pasteString:String = PasteOperation(event.operation).textScrap.textFlow.getText();
+				var tempChar:String;
+				
+				var newString:String = "";
+				
+				for (var i:int = 0; i < pasteString.length; i++) {
+					
+					tempChar = _inputMask.charAt(i);
+					
+					if (isMask(tempChar)) {
+						newString += pasteString.charAt(i);
+					} else {
+						newString += _inputMask.charAt(i);
+					}
+				}
+				
+				text = newString;
+				
 			}
 		}
 		
 		override protected function keyDownHandler(event:KeyboardEvent):void
 		{
 			//super.keyDownHandler(event);
+			
+			if (event.ctrlKey) {
+				return;
+			}
 			
 			switch (event.keyCode) {
 				case Keyboard.UP:
@@ -440,9 +487,12 @@ package zendflex.components
 		{
 			super.focusInHandler(event);
 			
-			if (text == _currentInputMask) {
-				selectRange(0, 0);
-			}
+			checkPosition();
+		}
+		
+		protected function clickHandler(event:MouseEvent):void
+		{
+			checkPosition();
 		}
 		
 		//------------------------------------------------------------
@@ -456,6 +506,7 @@ package zendflex.components
 			super();
 			
 			addEventListener(TextOperationEvent.CHANGING, changingHandler);
+			addEventListener(MouseEvent.CLICK, clickHandler);
 		}
 	
 	}

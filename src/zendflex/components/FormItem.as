@@ -1,8 +1,8 @@
 package zendflex.components
 {
-	import spark.components.FormItem;
+	import mx.containers.FormItem;
 	
-	public class FormItem extends spark.components.FormItem
+	public class FormItem extends mx.containers.FormItem
 	{
 		
 		//------------------------------------------------------------
