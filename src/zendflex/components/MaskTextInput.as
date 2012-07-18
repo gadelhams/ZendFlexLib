@@ -352,6 +352,10 @@ package zendflex.components
 		 */
 		private function recursiveDeleteChar():void
 		{
+			if (_cursorPosition < 0) {
+				return;
+			}
+			
 			var character:* = _inputMask.charAt(_cursorPosition);
 			
 			if (isMask(_inputMask.charAt(_cursorPosition))) {
@@ -427,22 +431,36 @@ package zendflex.components
 			}
 			
 			if (event.operation is PasteOperation) {
+				text = "";
+				
 				var pasteString:String = PasteOperation(event.operation).textScrap.textFlow.getText();
 				var tempChar:String;
 				
+				var j:int = 0;
+				
 				var newString:String = "";
 				
-				for (var i:int = 0; i < pasteString.length; i++) {
+				for (var i:int = 0; j < pasteString.length; i++) {
 					
 					tempChar = _inputMask.charAt(i);
 					
 					if (isMask(tempChar)) {
-						newString += pasteString.charAt(i);
+						newString += pasteString.charAt(j);
+						
+						trace('char inserido: ' + pasteString.charAt(j));
+						j++;
 					} else {
 						newString += _inputMask.charAt(i);
+						
+						trace('char inserido: ' + _inputMask.charAt(i));
 					}
 				}
 				
+				if (newString.length < _blankCharsPositions.length) {
+					
+				}
+				
+				trace('nova string: ' + newString);
 				text = newString;
 				
 			}
