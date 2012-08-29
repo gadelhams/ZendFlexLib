@@ -20,21 +20,24 @@ package zendflex.components
 		}
 		
 		protected function handleChangeEvent(event:TextOperationEvent):void {
-			if(this.text.length == maxChars) {
+			if(maxChars > 0 && this.text.length == maxChars) {
 				focusManager.setFocus(focusManager.getNextFocusManagerComponent());
 			}
 		}
 		
-		public function set maxCharToNextComponent(value:int):void {
-			maxChars = value;
-			if(!isNaN(value)) {
+		public function set maxCharToNextComponent(value:Boolean):void {
+			if(value) {
 				this.addEventListener(TextOperationEvent.CHANGE, handleChangeEvent);
 			} else {
 				this.removeEventListener(TextOperationEvent.CHANGE, handleChangeEvent);
 			}
 		}
 		
-		public function get maxCharToNextComponent():int {
+		/**
+		 * <p> Var that controls whether or not the focus is to go to the next component 
+		 * after reaching the maxChar property </p>
+		 */
+		public function get maxCharToNextComponent():Boolean {
 			return maxCharToNextComponent;
 		}
 		
